@@ -15,6 +15,8 @@ public class Conexion extends SQLiteOpenHelper {
 
    String query ="CREATE TABLE agenda(nombre TEXT, selecionar TEXT);";
 
+
+
     public Conexion(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
     }
@@ -42,6 +44,21 @@ public class Conexion extends SQLiteOpenHelper {
         if(resgistros.moveToFirst()){
             do {
                 lista.add(" "+resgistros.getString(0)+" "+resgistros.getString(1));
+            }while(resgistros.moveToNext());
+        }
+        return lista;
+    }
+
+    public ArrayList llenar()
+    {
+        ArrayList<String> lista=new ArrayList<>();
+        SQLiteDatabase database=this.getWritableDatabase();
+        String q="SELECT * FROM agenda";
+        Cursor resgistros=database.rawQuery(q,null);
+
+        if(resgistros.moveToFirst()){
+            do {
+                lista.add(" "+resgistros.getString(0));
             }while(resgistros.moveToNext());
         }
         return lista;
