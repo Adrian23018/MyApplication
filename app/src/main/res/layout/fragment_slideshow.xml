@@ -1,0 +1,89 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:layout_margin="0dp"
+    android:background="@drawable/gradiente"
+    android:orientation="vertical"
+    tools:context=".ui.slideshow.SlideshowFragment">
+
+
+    <TextView
+        android:id="@+id/espacio1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+
+        android:text=" " />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:gravity="center"
+        android:text="Agregar Tiempo de la Actividad"
+
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="99dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="30dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="232dp">
+
+
+        <EditText
+            android:id="@+id/ediNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="15dp"
+            android:gravity="center"
+            android:text="" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/Tiempo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Tiempo"
+        tools:layout_editor_absoluteX="173dp"
+        tools:layout_editor_absoluteY="203dp" />
+
+    <Button
+        android:id="@+id/btnEnLinea"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:backgroundTint="@android:color/background_light"
+        android:drawableBottom="@drawable/guardar2222"
+        android:gravity="center"
+
+        android:text="GUARDAR"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="538dp" />
+
+
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout_editor_absoluteX="5dp"
+        tools:layout_editor_absoluteY="415dp" />
+
+</LinearLayout>
