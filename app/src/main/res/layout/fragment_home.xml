@@ -1,28 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="15dp"
+    android:orientation="vertical"
+    tools:context=".ui.home.HomeFragment">
+
+
+    <TextView
+        android:id="@+id/usuario"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-
-        android:layout_margin="0dp"
-        android:background="@drawable/gradiente"
-        android:orientation="vertical"
-        tools:context=".ui.home.HomeFragment">
-
+        android:layout_height="wrap_content"
+        android:text="" />
 
     <TextView
         android:id="@+id/espacio1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="40dp"
+        android:text=" " />
+
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        app:srcCompat="@drawable/usuario" />
+
+    <EditText
+        android:id="@+id/ediEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="30dp"
+        android:ems="10"
         android:gravity="center"
-        android:text="INICIO "
+        android:hint="Email"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 
+    <EditText
+        android:id="@+id/ediPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint=" Password"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:inputType="textPassword"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 
+    <Button
+        android:id="@+id/btnIniciar"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:drawableBottom="@android:drawable/ic_lock_lock"
+        android:gravity="center"
+        android:layout_margin="15dp"
+        android:text="INICIAR SESIÓN" />
 
-    </LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:weightSum="3" />
+
+</LinearLayout>
