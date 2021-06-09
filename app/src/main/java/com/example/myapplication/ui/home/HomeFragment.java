@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -36,12 +37,16 @@ public class HomeFragment extends Fragment {
 
     private FirebaseAuth mAugth;
     private DatabaseReference mDatabase;
+    DrawerLayout myDrawerLayout;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
         homeViewModel = ViewModelProviders.of(this).get(HomeViewModel.class);
         View r = inflater.inflate(R.layout.fragment_home, container, false);
+
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
         FirebaseApp.initializeApp(null);
 
         email = r.findViewById(R.id.ediEmail);
@@ -59,16 +64,13 @@ public class HomeFragment extends Fragment {
                 }else{
                     Toast.makeText(getActivity().getApplicationContext(),"CAMPOS VACIOS ", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
 
         return r;
     }
 
-
-    private void loginUser(){
+  private void loginUser(){
 
        // FirebaseApp.initializeApp();
         mAugth= FirebaseAuth.getInstance();

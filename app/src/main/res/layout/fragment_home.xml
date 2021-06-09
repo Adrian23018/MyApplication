@@ -15,12 +15,16 @@
         android:layout_height="wrap_content"
         android:text="" />
 
+
     <TextView
         android:id="@+id/espacio1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="40dp"
-        android:text=" " />
+        android:layout_gravity="center"
+        android:layout_margin="70dp"
+        android:gravity="center"
+        android:text="LOGIN "
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
 
     <ImageView
