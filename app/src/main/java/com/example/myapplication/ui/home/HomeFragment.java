@@ -16,7 +16,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
+import com.example.myapplication.Main2Activity;
 import com.example.myapplication.R;
+import com.example.myapplication.RegistrarUsuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
@@ -30,7 +33,7 @@ public class HomeFragment extends Fragment {
     private HomeViewModel homeViewModel;
 
     private EditText email, pass;
-    private Button boton;
+    private Button boton, registro;
 
     private String email1="";
     private String password="";
@@ -52,6 +55,14 @@ public class HomeFragment extends Fragment {
         email = r.findViewById(R.id.ediEmail);
         pass = r.findViewById(R.id.ediPassword);
         boton= r.findViewById(R.id.btnIniciar);
+        registro=r.findViewById(R.id.btnRegistro);
+
+        registro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                registarUsusario();
+            }
+        });
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +99,11 @@ public class HomeFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void registarUsusario()
+    {
+        startActivity(new Intent(getActivity().getApplicationContext(), RegistrarUsuario.class));
     }
 }
 
