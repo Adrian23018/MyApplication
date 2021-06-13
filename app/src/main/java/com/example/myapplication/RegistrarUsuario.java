@@ -3,13 +3,18 @@ package com.example.myapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.myapplication.conexion.Conexion;
+import com.example.myapplication.conexion.ConexionUsuario;
+import com.example.myapplication.ui.gallery.GalleryFragment;
 import com.example.myapplication.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -49,7 +54,16 @@ public class RegistrarUsuario extends AppCompatActivity {
         nombre = (EditText) findViewById(R.id.edinombre);
 
         boton = findViewById(R.id.btnRegistrar);
+        boton2=findViewById(R.id.btnRegistrar2);
 
+
+  boton2.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+          GuardarDatos();
+
+      }
+  });
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,6 +93,35 @@ public class RegistrarUsuario extends AppCompatActivity {
 
         });
 
+    }
+
+
+    public void GuardarDatos() {
+        String nombre2 = nombre.getText().toString();
+        String email2 =email.getText().toString();
+        String password= pass.getText().toString();
+
+
+        ConexionUsuario conexion = new ConexionUsuario(this, "Usuarios", null, 1);
+        SQLiteDatabase db = conexion.getWritableDatabase();
+        if (db != null) {
+            System.out.println("Entro");
+            ContentValues registroNuevo = new ContentValues();
+            registroNuevo.put("nombre", nombre2);
+            registroNuevo.put("gmail", email2);
+            registroNuevo.put("password", password);
+
+            db.insert("usuario", null, registroNuevo);
+            Toast.makeText(this, "Datos Almacenados", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(RegistrarUsuario.this, GalleryFragment.class);
+            Bundle datos = new Bundle();
+            datos.putString("Email", email.getText().toString());
+            //datos.putString("password", password.getText().toString());
+            intent.putExtras(datos);
+            startActivity(intent);
+
+        }
     }
 
     private void registroUser() {
