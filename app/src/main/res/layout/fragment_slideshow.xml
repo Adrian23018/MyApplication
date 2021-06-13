@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@drawable/side_nav_bar"
     android:layout_margin="0dp"
     android:orientation="vertical"
     tools:context=".ui.slideshow.SlideshowFragment">
@@ -13,8 +13,6 @@
         android:id="@+id/espacio1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-
         android:text=" " />
 
 
@@ -34,9 +32,9 @@
         android:id="@+id/spinner"
         android:layout_width="190dp"
         android:layout_height="50dp"
-        android:layout_margin="40dp"
-        android:background="@color/colorAccent"
         android:layout_gravity="center"
+        android:layout_margin="40dp"
+        android:background="@color/common_google_signin_btn_text_dark_default"
         android:gravity="center"
         tools:layout_editor_absoluteX="25dp"
         tools:layout_editor_absoluteY="415dp" />
