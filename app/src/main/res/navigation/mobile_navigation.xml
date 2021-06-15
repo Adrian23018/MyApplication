@@ -9,13 +9,19 @@
         android:id="@+id/nav_home"
         android:name="com.example.myapplication.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/activity_login" />
+        tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_slideshow10"
         android:name="com.example.myapplication.ui.registro.RegistroUsuFragment"
         android:label="@string/menu_gallery2"
-        tools:layout="@layout/fragment_registro_u" />
+        tools:layout="@layout/fragment_registrousu" />
+
+    <fragment
+        android:id="@+id/nav_eliminar"
+        android:name="com.example.myapplication.ui.Eliminar.EliminarFragment"
+        android:label="@string/menu_eliminar"
+        tools:layout="@layout/fragment_eliminar" />
 
     <fragment
         android:id="@+id/nav_gallery"

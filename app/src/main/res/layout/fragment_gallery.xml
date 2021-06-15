@@ -27,8 +27,8 @@
 
         <Spinner
             android:id="@+id/spinner"
-            android:layout_width="250dp"
-            android:layout_height="30dp"
+            android:layout_width="266dp"
+            android:layout_height="61dp"
             android:layout_gravity="center"
             android:background="@color/common_google_signin_btn_text_dark_default"
             android:gravity="center"
@@ -47,12 +47,13 @@
 
         <EditText
             android:id="@+id/ediNombre"
-            android:layout_width="match_parent"
+            android:layout_width="323dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="15dp"
             android:gravity="center"
-            android:text="" />
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/espacio1"
@@ -117,8 +118,8 @@
             <Button
                 android:id="@+id/btnEGuardar"
                 style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="121dp"
+                android:layout_height="63dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:backgroundTint="@android:color/background_light"
@@ -130,8 +131,8 @@
             <Button
                 android:id="@+id/btnMostar"
                 style="@style/Widget.AppCompat.Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="110dp"
+                android:layout_height="70dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:backgroundTint="@android:color/background_light"
@@ -150,10 +151,19 @@
             android:gravity="center"
             android:text=" " />
 
-        <ListView
-            android:id="@+id/lista"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="175dp" />
+            android:layout_height="163dp"
+            android:layout_gravity="center"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ListView
+                android:id="@+id/lista"
+                android:layout_width="match_parent"
+                android:layout_height="175dp" />
+        </LinearLayout>
 
     </LinearLayout>
 </ScrollView>

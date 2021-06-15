@@ -34,9 +34,13 @@ public class ShareFragment extends Fragment {
     Button consultar;
     ArrayList<String> lista;
     ArrayAdapter adaptador;
-    TextView datosC;
+    TextView datosC,datosC2,horas;
     String[] datos;
-
+    int res;
+    int noProductivo;
+    int improductivo;
+    int sumatoria;
+int resta;
 
     private ShareViewModel shareViewModel;
     ArrayList<String>valoresX = new ArrayList<>();
@@ -55,12 +59,14 @@ public class ShareFragment extends Fragment {
 
         consultar=root.findViewById(R.id.btnFiltrar);
         datosC=root.findViewById(R.id.datosCompletos);
+        datosC2=root.findViewById(R.id.datosCompletos2);
+        horas=root.findViewById(R.id.horas);
 
         consultar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                ConexionTiempo db=new ConexionTiempo(getActivity().getApplicationContext(),"USUTIEMPO",null,1);
+                ConexionTiempo db = new ConexionTiempo(getActivity().getApplicationContext(), "USUTIEMPO", null, 1);
                 //String buscar2=combo.getSelectedItem().toString();
 
 
@@ -70,68 +76,79 @@ public class ShareFragment extends Fragment {
                 //adaptador=new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, lista);
                 //combo2.setAdapter(adaptador);
 
-                String buscar2=combo.getSelectedItem().toString();
+                String buscar2 = combo.getSelectedItem().toString();
 
-                datos=db.buscar_reg1(buscar2);
-                datosC.setText(datos[0]);//DATOS
-                //horas.setText(datos[1]);
+                datos = db.buscar_reg10(buscar2);
+
+                //  sumatoria=Integer.parseInt(datos[0]);
+
+                datosC.setText(datos[0]);
+
+                datosC2.setText(datos[2]);//DATOS
+
 
                 Toast.makeText(getActivity().getApplicationContext(), "Siiiiiiiii", Toast.LENGTH_SHORT).show();
 
+                // DEFINIMOS ALGUNOS ATRIBUTOS
+                pieChart.setHoleRadius(40f);
+                pieChart.setDrawXValues(true);
+                pieChart.setDrawYValues(true);
+                pieChart.setRotationEnabled(true);
+                pieChart.animateXY(1500, 1500);
+
+                // CREAMOS UNA LISTA PARA LOS VALORES X
+                improductivo = Integer.parseInt(datosC.getText() + "");
+                int porcentaje = improductivo * 5;
+
+                    resta = 100 - porcentaje;
+
+                valoresX.add("Productivo : " + porcentaje);
+                valoresX.add("No Productivo: " + resta);
+                //valoresX.add("Poco Productivo");
+
+                //valoresX.add("Improductivo");
+                //valoresX.add("Ventas");
+                //valoresX.add("Productivo");
+
+                // CREAMOS UNA LISTA PARA LOS VALORES DE Y
+                valoresY.add(new Entry(porcentaje, 0));  //valor Improductivo
+                // valoresY.add(new Entry(10, 1));
+                valoresY.add(new Entry(resta, 2));  //valor Productivo
+
+                // CREAMOS UNA LISTA DE LOS COLORES
+                colores.add(getResources().getColor(R.color.blue_flat));
+                colores.add(getResources().getColor(R.color.red_flat));
+                colores.add(getResources().getColor(R.color.green_flat));
+
+                // SETEAMOS LOS VALORES DE Y y LOS COLORES
+                PieDataSet set = new PieDataSet(valoresY, "Resultados");
+                set.setSliceSpace(5f);
+                set.setColors(colores);
+
+                // SETEAMOS LOS VALORES DE X
+                PieData data = new PieData(valoresX, set);
+                pieChart.setData(data);
+                pieChart.highlightValues(null);
+                pieChart.invalidate();
+
+                // OCULTAR DESCRIPCION
+
+                pieChart.setDescription("PRODUCTIVIDAD DEL DIA");
+
+                pieChart.setDescription("Registro de productividad");
+
+
+                // OCULTAR LEYENDA
+                pieChart.setDrawLegend(true);
             }
+
+
         });
 
 
         cargarDatos2();
 
-        // DEFINIMOS ALGUNOS ATRIBUTOS
-        pieChart.setHoleRadius(40f);
-        pieChart.setDrawXValues(true);
-        pieChart.setDrawYValues(true);
-        pieChart.setRotationEnabled(true);
-        pieChart.animateXY(1500, 1500);
 
-        // CREAMOS UNA LISTA PARA LOS VALORES X
-
-        valoresX.add("Productivo");
-        valoresX.add("No Productivo");
-        valoresX.add("Poco Productivo");
-
-        valoresX.add("Improductivo");
-        //valoresX.add("Ventas");
-        valoresX.add("Productivo");
-
-
-        // CREAMOS UNA LISTA PARA LOS VALORES DE Y
-        valoresY.add(new Entry(50, 0));  //valor Improductivo
-       // valoresY.add(new Entry(10, 1));
-        valoresY.add(new Entry(50, 2));  //valor Productivo
-
-        // CREAMOS UNA LISTA DE LOS COLORES
-        colores.add(getResources().getColor(R.color.red_flat));
-        colores.add(getResources().getColor(R.color.blue_flat));
-        colores.add(getResources().getColor(R.color.green_flat));
-
-        // SETEAMOS LOS VALORES DE Y y LOS COLORES
-        PieDataSet set = new PieDataSet(valoresY, "Resultados");
-        set.setSliceSpace(5f);
-        set.setColors(colores);
-
-        // SETEAMOS LOS VALORES DE X
-        PieData data = new PieData(valoresX, set);
-        pieChart.setData(data);
-        pieChart.highlightValues(null);
-        pieChart.invalidate();
-
-        // OCULTAR DESCRIPCION
-
-        pieChart.setDescription("PRODUCTIVIDAD DEL DIA");
-
-        pieChart.setDescription("Registro de productividad");
-
-
-        // OCULTAR LEYENDA
-        pieChart.setDrawLegend(true);
 
         return root;
     }

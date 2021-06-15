@@ -3,12 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
 
-    android:orientation="vertical"
     android:layout_margin="15dp"
+    android:background="@drawable/side_nav_bar"
+    android:orientation="vertical"
     tools:context=".ui.registro.RegistroUsuFragment">
-
 
 
     <TextView
@@ -20,10 +20,12 @@
         android:text="REGISTRO " />
 
     <TextView
-        android:id="@+id/espacio1"
+        android:id="@+id/usuarioT"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="25dp"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:text=" " />
 
 
@@ -36,15 +38,16 @@
 
     <EditText
         android:id="@+id/edinombre"
-        android:layout_width="match_parent"
+        android:layout_width="352dp"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:ems="10"
         android:hint=" Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
     <EditText
         android:id="@+id/ediname"
-        android:layout_width="match_parent"
+        android:layout_width="352dp"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint=" E-mail"
@@ -53,8 +56,9 @@
 
     <EditText
         android:id="@+id/ediPassword"
-        android:layout_width="match_parent"
+        android:layout_width="352dp"
         android:layout_height="wrap_content"
+        android:layout_margin="5dp"
         android:ems="10"
         android:hint=" Password"
         android:inputType="textPassword"
@@ -62,33 +66,24 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="195dp"
+        android:layout_height="100dp"
         android:layout_gravity="center"
+        android:layout_margin="20dp"
         android:gravity="center"
         android:orientation="horizontal">
+
 
         <Button
             android:id="@+id/btnRegistrar"
             style="@style/Widget.AppCompat.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="128dp"
+            android:layout_height="67dp"
             android:layout_gravity="center"
             android:layout_margin="10dp"
-            android:gravity="center"
             android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
-            android:text="REGISTRAR" />
-
-        <Button
-            android:id="@+id/btnRegistrar2"
-            style="@style/Widget.AppCompat.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_margin="10dp"
             android:gravity="center"
-            android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
-            android:text="REGISTRAR BD" />
+            android:text="REGISTRAR " />
 
 
     </LinearLayout>

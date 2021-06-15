@@ -55,7 +55,7 @@ public class Main2Activity extends AppCompatActivity implements EnviarMensaje {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_slideshow2)
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_slideshow2,R.id.nav_slideshow10, R.id.nav_eliminar)
                 .setDrawerLayout(drawer)
                 .build();
         drawer.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);

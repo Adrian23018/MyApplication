@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class ConexionTiempo extends SQLiteOpenHelper {
 
 
-   String query ="CREATE TABLE tiempo(hora TEXT, usuario TEXT, actividad TEXT);";
+   String query ="CREATE TABLE tiempo(hora INTEGER, usuario TEXT, actividad TEXT);";
 
 
 
@@ -65,6 +65,7 @@ public class ConexionTiempo extends SQLiteOpenHelper {
         }
         return lista;
     }
+//DEVOLVERME
 
     public String[] buscar_reg1(String buscar){
 
@@ -74,7 +75,26 @@ public class ConexionTiempo extends SQLiteOpenHelper {
         Cursor registros=database.rawQuery(q,null);
         if(registros.moveToFirst()){
             for (int i = 0; i <3 ; i++) {
+                datos[i]=registros.getString(i);
+
+            }
+            datos[1]="Encontrado";
+        }else{
+            datos[1]="No Encontrados "+buscar;
+        }
+        return datos;
+    }
+
+    public String[] buscar_reg10(String buscar){
+
+        String[] datos=new String[3];
+        SQLiteDatabase database=this.getWritableDatabase();
+        String q="SELECT Sum(hora) FROM tiempo WHERE usuario ='"+buscar+"'";
+        Cursor registros=database.rawQuery(q,null);
+        if(registros.moveToFirst()){
+            for (int i = 0; i <3 ; i++) {
                 datos[i]=registros.getString(0);
+
             }
             datos[1]="Encontrado";
         }else{

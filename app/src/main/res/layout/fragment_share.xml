@@ -63,16 +63,41 @@
         android:orientation="horizontal"
         tools:layout_editor_absoluteX="16dp"
         tools:layout_editor_absoluteY="232dp">
-    <TextView
-        android:id="@+id/datosCompletos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:gravity="center"
-        android:text=""
-        android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        tools:layout_editor_absoluteX="173dp"
-        tools:layout_editor_absoluteY="203dp" />
+
+        <TextView
+            android:id="@+id/datosCompletos"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="3dp"
+            android:gravity="center"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            tools:layout_editor_absoluteX="173dp"
+            tools:layout_editor_absoluteY="203dp" />
+
+        <TextView
+            android:id="@+id/horas"
+            android:layout_width="96dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="3dp"
+            android:gravity="center"
+            android:text=" HORAS DE "
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            tools:layout_editor_absoluteX="173dp"
+            tools:layout_editor_absoluteY="203dp" />
+
+        <TextView
+            android:id="@+id/datosCompletos2"
+            android:layout_width="106dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            tools:layout_editor_absoluteX="173dp"
+            tools:layout_editor_absoluteY="203dp" />
     </LinearLayout>
 
     <LinearLayout

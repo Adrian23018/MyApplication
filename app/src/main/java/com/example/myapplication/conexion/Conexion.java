@@ -77,26 +77,12 @@ public class Conexion extends SQLiteOpenHelper {
         }
     }
 
-/*
-    public int Verificar(String u){
-
-        int a=0;
-        SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cr=db.rawQuery("select * from registro WHERE email="+u,null);
-        if(cr!=null && cr.moveToFirst()){
-            do {
-                if(cr.getString(0).equals(u)){
-                }
-            }while(cr.moveToNext());
-        }
-        return a;
-    }*/
 
     public String[] buscar_reg10(String buscar){
 
        String[] datos=new String[2];
        SQLiteDatabase database=this.getWritableDatabase();
-       String q="SELECT * FROM registro WHERE email ='"+buscar+"'";
+       String q="SELECT * FROM registro WHERE nombre ='"+buscar+"'";
        Cursor registros=database.rawQuery(q,null);
        if(registros.moveToFirst()){
            for (int i = 0; i <1 ; i++) {
@@ -129,5 +115,27 @@ public class Conexion extends SQLiteOpenHelper {
         }
         return lista;
     }
+
+    public ArrayList buscar_reg2(String buscar){
+
+        ArrayList<String> lista=new ArrayList<>();
+
+        SQLiteDatabase database=this.getWritableDatabase();
+        String q="SELECT * FROM registro WHERE nombre ='"+buscar+"'";
+        Cursor registros=database.rawQuery(q,null);
+        if(registros.moveToFirst()){
+            do {
+                lista.add(" "+registros.getString(2));
+            }while(registros.moveToNext());
+
+            System.out.println("Encontrado");
+        }else{
+            // datos[1]="No Encontrados "+buscar;
+            System.out.println("No se encontraron");
+        }
+        return lista;
+    }
+
+
 
 }

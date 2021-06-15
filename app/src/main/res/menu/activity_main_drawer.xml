@@ -24,8 +24,13 @@
             android:title="Agregar Tiempos" />
 
         <item
-            android:id="@+id/nav_slideshow2"
+        android:id="@+id/nav_slideshow2"
+        android:icon="@drawable/graficas"
+        android:title="Graficas" />
+
+        <item
+            android:id="@+id/nav_eliminar"
             android:icon="@drawable/graficas"
-            android:title="Graficas" />
+            android:title="Eliminar Usuarios" />
     </group>
 </menu>

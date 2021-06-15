@@ -25,6 +25,7 @@
     <string name="menu_gallery">Nueva Actividad</string>
     <string name="menu_slideshow">Tiempos</string>
     <string name="menu_slideshow2">Estadisticas</string>
+    <string name="menu_eliminar">Eliminar Usuario</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

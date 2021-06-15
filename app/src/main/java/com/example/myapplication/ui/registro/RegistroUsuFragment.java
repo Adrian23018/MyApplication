@@ -23,6 +23,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.myapplication.EnviarMensaje;
+import com.example.myapplication.Main2Activity;
 import com.example.myapplication.R;
 import com.example.myapplication.RegistrarUsuario;
 import com.example.myapplication.conexion.ConexionUsuario;
@@ -43,17 +44,18 @@ import java.util.Map;
 public class RegistroUsuFragment extends Fragment {
 
     private EditText email, pass, nombre, id;
-    private Button boton, boton2;
+    private Button boton;
 
     private RegistroUsuViewModel homeViewModel;
 
     private String nombre1 = "";
     private String email1 = "";
     private String password = "";
-    private String id1 = "";
+
     FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
     EnviarMensaje EM;
+    TextView usuarioo;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
             ViewGroup container, Bundle savedInstanceState) {
@@ -63,50 +65,13 @@ public class RegistroUsuFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
         email = (EditText) r.findViewById(R.id.ediname);
         pass = (EditText) r.findViewById(R.id.ediPassword);
-
         nombre = (EditText) r.findViewById(R.id.edinombre);
-
         boton = r.findViewById(R.id.btnRegistrar);
-        boton2=r.findViewById(R.id.btnRegistrar2);
-
-        nombre1=nombre.getText().toString();
+        usuarioo=r.findViewById(R.id.usuariot);
 
 
-
-
-        boton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // GuardarDatos();
-/*
-
-                //Crear bundle, que son los datos que pasaremos
-                Bundle datosAEnviar = new Bundle();
-// Aquí pon todos los datos que quieras en formato clave, valor
-                //datosAEnviar.putLong("nombre",);
-// Y puedes pasarle más datos..
-
-                datosAEnviar.putString("nombre", nombre1);
-// Preparar el fragmento
-                Fragment fragmento = new GalleryFragment();
-// ¡Importante! darle argumentos
-                fragmento.setArguments(datosAEnviar);
-                FragmentManager fragmentManager = getChildFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.usuario, fragmento);
-                fragmentTransaction.addToBackStack(null);
-
-// Terminar transición y nos vemos en el fragmento de destino
-                fragmentTransaction.commit();
-
-                //getSupportFragmentManager().beginTransaction().add(R.id.nombreUsu,fragment).commit();
-
-*/
-            }
-        });
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,20 +81,17 @@ public class RegistroUsuFragment extends Fragment {
                 email1 = email.getText().toString();
                 password = pass.getText().toString();
 
-
-                // FirebaseDatabase database= FirebaseDatabase.getInstance();
-                // DatabaseReference myref=database.getReference("usuarios");
-
                 if (!email1.isEmpty() && !password.isEmpty() && !nombre1.isEmpty()) {
 
                     if (password.length() >= 6) {
-                        registroUser();
+                        GuardarDatos();
+
                     } else {
-                        Toast.makeText(getActivity().getApplicationContext(), "El Password debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "EL PASSWORD DEBE TENER AL MENOS 6 CARACTERES", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Campos vacios ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "CAMPOS VACIOS ", Toast.LENGTH_LONG).show();
 
                 }
             }
@@ -139,39 +101,34 @@ public class RegistroUsuFragment extends Fragment {
         return r;
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        EM= (EnviarMensaje) activity;
-    }
 
     public void GuardarDatos() {
         String nombre2 = nombre.getText().toString();
         String email2 =email.getText().toString();
         String password= pass.getText().toString();
 
-
         ConexionUsuario conexion = new ConexionUsuario(getActivity().getApplicationContext(), "Usuarios", null, 1);
         SQLiteDatabase db = conexion.getWritableDatabase();
         if (db != null) {
-            System.out.println("Entro");
+
             ContentValues registroNuevo = new ContentValues();
             registroNuevo.put("nombre", nombre2);
             registroNuevo.put("gmail", email2);
             registroNuevo.put("password", password);
 
             db.insert("usuario", null, registroNuevo);
-            Toast.makeText(getActivity().getApplicationContext(), "Datos Almacenados", Toast.LENGTH_SHORT).show();
-/*
-           Intent intent = new Intent(getActivity().getApplicationContext(), GalleryFragment.class);
-            Bundle datos = new Bundle();
-            datos.putString("usuario", nombre.getText().toString());
-            intent.putExtras(datos);
-            startActivity(intent);*/
+            Toast.makeText(getActivity().getApplicationContext(), "USUARIO REGISTRADO CORRECTAMENTE", Toast.LENGTH_SHORT).show();
+
+
+            startActivity(new Intent(getActivity().getApplicationContext(), Main2Activity.class));
+
 
         }
-    }
+        nombre.setText("");
+        email.setText("");
+        pass.setText("");
 
+    }
 
 
     private void registroUser() {

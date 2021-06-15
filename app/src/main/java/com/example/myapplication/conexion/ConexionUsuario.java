@@ -97,16 +97,18 @@ public class ConexionUsuario extends SQLiteOpenHelper {
 
 
 
-    public int loginEmail(String u){
+    public int loginEliminar(){
         int a=0;
         SQLiteDatabase db=this.getReadableDatabase();
-        Cursor cr=db.rawQuery("select * from usuario",null);
+      // String q="DELETE FROM usuario WHERE gmail='"+u+"'";
+        String q="DELETE FROM usuario";
+        Cursor cr=db.rawQuery(q,null);
         if(cr!=null && cr.moveToFirst()){
             do {
 
-                if(cr.getString(1).equals(u)){
+                // if(cr.getString(1).equals(u) && cr.getString(2).equals(p)){
                     a++;
-                }
+
             }while(cr.moveToNext());
         }
         return a;

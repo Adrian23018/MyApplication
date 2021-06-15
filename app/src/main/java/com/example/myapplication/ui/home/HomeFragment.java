@@ -63,15 +63,9 @@ public class HomeFragment extends Fragment {
         email = r.findViewById(R.id.ediEmail);
         pass = r.findViewById(R.id.ediPassword);
         boton= r.findViewById(R.id.btnIniciar);
-        registro=r.findViewById(R.id.btnRegistro);
         usu=r.findViewById(R.id.usuario);
 
-        registro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                registarUsusario();
-            }
-        });
+       
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,29 +105,5 @@ public class HomeFragment extends Fragment {
         }
     }
 
-  private void loginUser(){
-
-       // FirebaseApp.initializeApp();
-        mAugth= FirebaseAuth.getInstance();
-        mAugth.signInWithEmailAndPassword(email1,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    //startActivity(new Intent(Logearse.this, Home.class));
-                    //finish();
-                    Toast.makeText(getActivity().getApplicationContext(), "SE HA INICIADO SESIÓN CORRECTAMENTE ", Toast.LENGTH_SHORT).show();
-                }
-                else
-                {
-                    Toast.makeText(getActivity().getApplicationContext(), "NO SE HA INICIADO SESIÓN COMPRUEBE LOS DATOS", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-    }
-
-    private void registarUsusario()
-    {
-        startActivity(new Intent(getActivity().getApplicationContext(), RegistrarUsuario.class));
-    }
 }
 
