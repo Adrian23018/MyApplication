@@ -73,7 +73,7 @@ public class ShareFragment extends Fragment {
                 String buscar2=combo.getSelectedItem().toString();
 
                 datos=db.buscar_reg1(buscar2);
-                datosC.setText(datos[0]);
+                datosC.setText(datos[0]);//DATOS
                 //horas.setText(datos[1]);
 
                 Toast.makeText(getActivity().getApplicationContext(), "Siiiiiiiii", Toast.LENGTH_SHORT).show();
@@ -92,14 +92,20 @@ public class ShareFragment extends Fragment {
         pieChart.animateXY(1500, 1500);
 
         // CREAMOS UNA LISTA PARA LOS VALORES X
+
         valoresX.add("Productivo");
         valoresX.add("No Productivo");
         valoresX.add("Poco Productivo");
 
+        valoresX.add("Improductivo");
+        //valoresX.add("Ventas");
+        valoresX.add("Productivo");
+
+
         // CREAMOS UNA LISTA PARA LOS VALORES DE Y
-        valoresY.add(new Entry(40, 0));
-        valoresY.add(new Entry(10, 1));
-        valoresY.add(new Entry(50, 2));
+        valoresY.add(new Entry(50, 0));  //valor Improductivo
+       // valoresY.add(new Entry(10, 1));
+        valoresY.add(new Entry(50, 2));  //valor Productivo
 
         // CREAMOS UNA LISTA DE LOS COLORES
         colores.add(getResources().getColor(R.color.red_flat));
@@ -118,7 +124,11 @@ public class ShareFragment extends Fragment {
         pieChart.invalidate();
 
         // OCULTAR DESCRIPCION
+
         pieChart.setDescription("PRODUCTIVIDAD DEL DIA");
+
+        pieChart.setDescription("Registro de productividad");
+
 
         // OCULTAR LEYENDA
         pieChart.setDrawLegend(true);
