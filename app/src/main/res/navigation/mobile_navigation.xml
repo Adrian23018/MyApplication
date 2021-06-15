@@ -9,7 +9,13 @@
         android:id="@+id/nav_home"
         android:name="com.example.myapplication.ui.home.HomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/activity_login" />
+
+    <fragment
+        android:id="@+id/nav_slideshow10"
+        android:name="com.example.myapplication.ui.registro.RegistroUsuFragment"
+        android:label="@string/menu_gallery2"
+        tools:layout="@layout/fragment_registro_u" />
 
     <fragment
         android:id="@+id/nav_gallery"

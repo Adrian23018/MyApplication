@@ -2,11 +2,13 @@ package com.example.myapplication.ui.slideshow;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +25,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.RegistrarUsuario;
 import com.example.myapplication.conexion.Conexion;
 import com.example.myapplication.conexion.ConexionTiempo;
+import com.example.myapplication.conexion.ConexionUsuario;
 import com.example.myapplication.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -36,14 +39,16 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SlideshowFragment extends Fragment {
+public class SlideshowFragment extends Fragment  {
 
     private SlideshowViewModel slideshowViewModel;
-    Spinner combo;
+    Spinner combo, combo2;
     ArrayList<String> lista;
     ArrayAdapter adaptador;
-    EditText horaI,horaF;
-    Button guardar;
+    EditText hora,horaF;
+    Button guardar, consultar;
+    EditText buscar;
+    TextView prueba;
     FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
@@ -55,21 +60,39 @@ public class SlideshowFragment extends Fragment {
                 ViewModelProviders.of(this).get(SlideshowViewModel.class);
         View root = inflater.inflate(R.layout.fragment_slideshow, container, false);
 
-        horaI=root.findViewById(R.id.ediHoraIni);
-        SimpleDateFormat ho=new SimpleDateFormat("h:mm a");
-        String horaString = ho.format(d);
-        horaI.setText(horaString);
-
-        horaF=root.findViewById(R.id.ediHoraFin);
-        SimpleDateFormat ho2=new SimpleDateFormat("h:mm a");
-        String horaString2 = ho2.format(d);
-        horaF.setText(horaString2);
-
-        guardar=root.findViewById(R.id.btnGuardar2);
+        hora=root.findViewById(R.id.ediHora);
+        //SimpleDateFormat ho=new SimpleDateFormat("h:mm a");
+       // String horaString = ho.format(d);
+        //horaI.setText(horaString);
 
 
-       combo=root.findViewById(R.id.spinner);
-       cargarDatos();
+        prueba=root.findViewById(R.id.espacio1);
+
+
+        combo=root.findViewById(R.id.spinner);
+        combo2=root.findViewById(R.id.spinner2);
+
+        guardar=root.findViewById(R.id.btnGuardar);
+        consultar=root.findViewById(R.id.btnGuardar2);
+
+        consultar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Conexion db=new Conexion(getActivity().getApplicationContext(),"USUACTIVIDAD",null,1);
+                String buscar2=combo.getSelectedItem().toString();
+                //ArrayList datos;
+                lista=db.buscar_reg(buscar2);
+                adaptador=new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, lista);
+                combo2.setAdapter(adaptador);
+
+                Toast.makeText(getActivity().getApplicationContext(), "Siiiiiiiii", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
+
+       cargarDatos2();
 
 
        guardar.setOnClickListener(new View.OnClickListener() {
@@ -82,31 +105,35 @@ public class SlideshowFragment extends Fragment {
         return root;
     }
 
-    public void GuardarDatos() {
-        String inicio = horaI.getText().toString();
-        String finals = horaF.getText().toString();
-        String spinner = combo.getSelectedItem().toString();
 
-        ConexionTiempo conexion = new ConexionTiempo(getActivity().getApplicationContext(), "TIEMPO", null, 1);
+    public void GuardarDatos() {
+        String inicio = hora.getText().toString();
+        String usuario = combo.getSelectedItem().toString();
+        String actividad = combo2.getSelectedItem().toString();
+
+        ConexionTiempo conexion = new ConexionTiempo(getActivity().getApplicationContext(), "USUTIEMPO", null, 1);
         SQLiteDatabase db = conexion.getWritableDatabase();
         if (db != null) {
             System.out.println("Entro");
             ContentValues registroNuevo = new ContentValues();
-            registroNuevo.put("horaInicial", inicio);
-            registroNuevo.put("horaFinal", finals);
-            registroNuevo.put("actividad", spinner);
+            registroNuevo.put("hora", inicio);
+            registroNuevo.put("usuario", usuario);
+            registroNuevo.put("actividad", actividad);
 
             db.insert("tiempo", null, registroNuevo);
-            Toast.makeText(getActivity().getApplicationContext(), "Datos Almacenados", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Datos Almacenados BD USUTIEMPO", Toast.LENGTH_SHORT).show();
         }
     }
 
 
-
-    public void cargarDatos(){
-        Conexion conexion=new Conexion(getActivity().getApplicationContext(),"ACTIVIDAD2",null,1);
-        lista=conexion.llenar();
+    public void cargarDatos2(){
+        ConexionUsuario conexion=new ConexionUsuario(getActivity().getApplicationContext(),"Usuarios",null,1);
+        lista=conexion.llenar2();
         adaptador=new ArrayAdapter(getActivity().getApplicationContext(), android.R.layout.simple_list_item_1, lista);
         combo.setAdapter(adaptador);
     }
-}
+
+
+
+
+    }

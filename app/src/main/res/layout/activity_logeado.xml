@@ -7,33 +7,20 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/regis"
-        android:layout_width="420dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/side_nav_bar"
         android:layout_margin="0dp"
 
-        android:background="@drawable/side_nav_bar"
         android:orientation="vertical"
-        tools:context=".ui.gallery.GalleryFragment">
+        tools:context=".Logeado">
 
         <TextView
-            android:id="@+id/usuariot"
+            android:id="@+id/nombreUsu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
             android:text=" " />
 
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="250dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:background="@color/common_google_signin_btn_text_dark_default"
-            android:gravity="center"
-            tools:layout_editor_absoluteX="25dp"
-            tools:layout_editor_absoluteY="415dp" />
 
         <TextView
             android:id="@+id/textView"
@@ -79,7 +66,7 @@
                     android:id="@+id/radioProductiva"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="10dp"
                     android:checked="false"
                     android:text="PRODUCTIVA"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
@@ -89,7 +76,7 @@
                     android:id="@+id/radioNoProductiva"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
+                    android:layout_margin="10dp"
                     android:checked="true"
                     android:text="NO PRODUCTIVA"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
@@ -109,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            android:layout_margin="5dp"
+            android:layout_margin="30dp"
             android:gravity="center"
             android:orientation="horizontal">
 

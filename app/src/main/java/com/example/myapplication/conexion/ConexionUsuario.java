@@ -53,7 +53,7 @@ public class ConexionUsuario extends SQLiteOpenHelper {
     {
         ArrayList<String> lista=new ArrayList<>();
         SQLiteDatabase database=this.getWritableDatabase();
-        String q="SELECT * FROM agenda";
+        String q="SELECT * FROM usuario";
         Cursor resgistros=database.rawQuery(q,null);
 
         if(resgistros.moveToFirst()){
@@ -63,4 +63,54 @@ public class ConexionUsuario extends SQLiteOpenHelper {
         }
         return lista;
     }
+
+    public ArrayList llenar2()
+    {
+        ArrayList<String> lista=new ArrayList<>();
+        SQLiteDatabase database=this.getWritableDatabase();
+        String q="SELECT * FROM usuario";
+        Cursor resgistros=database.rawQuery(q,null);
+
+        if(resgistros.moveToFirst()){
+            do {
+                lista.add(" "+resgistros.getString(0));
+            }while(resgistros.moveToNext());
+        }
+        return lista;
+    }
+
+    public int loginA(String u, String p){
+       int a=0;
+        SQLiteDatabase db=this.getReadableDatabase();
+       Cursor cr=db.rawQuery("select * from usuario",null);
+               if(cr!=null && cr.moveToFirst()){
+                   do {
+
+                       if(cr.getString(1).equals(u) && cr.getString(2).equals(p)){
+                           a++;
+                       }
+                   }while(cr.moveToNext());
+               }
+               return a;
+    }
+
+
+
+
+    public int loginEmail(String u){
+        int a=0;
+        SQLiteDatabase db=this.getReadableDatabase();
+        Cursor cr=db.rawQuery("select * from usuario",null);
+        if(cr!=null && cr.moveToFirst()){
+            do {
+
+                if(cr.getString(1).equals(u)){
+                    a++;
+                }
+            }while(cr.moveToNext());
+        }
+        return a;
+    }
+
+
 }

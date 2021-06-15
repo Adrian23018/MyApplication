@@ -1,21 +1,23 @@
-package com.example.myapplication;
+package com.example.myapplication.ui.registro;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.FragmentTransaction;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.myapplication.conexion.Conexion;
+import com.example.myapplication.R;
 import com.example.myapplication.conexion.ConexionUsuario;
-import com.example.myapplication.ui.gallery.GalleryFragment;
 import com.example.myapplication.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -27,7 +29,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-public class RegistrarUsuario extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+
+ * create an instance of this fragment.
+ */
+public class RegistroU extends Fragment {
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
     private EditText email, pass, nombre, id;
     private Button boton, boton2;
@@ -40,37 +52,43 @@ public class RegistrarUsuario extends AppCompatActivity {
     FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_registrar_usuario);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+
+        View r = inflater.inflate(R.layout.fragment_gallery, container, false);
 
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        email = (EditText) findViewById(R.id.ediname);
-        pass = (EditText) findViewById(R.id.ediPassword);
+        email = (EditText) r.findViewById(R.id.ediname);
+        pass = (EditText) r.findViewById(R.id.ediPassword);
 
-        nombre = (EditText) findViewById(R.id.edinombre);
+        nombre = (EditText) r.findViewById(R.id.edinombre);
 
-        boton = findViewById(R.id.btnRegistrar);
-        boton2=findViewById(R.id.btnRegistrar2);
+        boton = r.findViewById(R.id.btnRegistrar);
+        boton2=r.findViewById(R.id.btnRegistrar2);
 
 
-  boton2.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-          GuardarDatos();
+        boton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GuardarDatos();
+                TextView enviar=(TextView) getActivity().findViewById(R.id.nombreUsu);
+                enviar.setText(nombre.getText().toString());
 
-          /*Bundle datos= new Bundle();
-          datos.putString("usuario",nombre.getText().toString());
-          GalleryFragment fragment=new GalleryFragment();
-          fragment.setArguments(datos);
-          getSupportFragmentManager().beginTransaction().add(R.id.nombreUsu,fragment).commit();*/
+               /* Bundle datos= new Bundle();
+                datos.putString("usuario",nombre.getText().toString());
+                GalleryFragment fragment=new GalleryFragment();
+                fragment.setArguments(datos);
+                getSupportFragmentManager().beginTransaction().add(R.id.nombreUsu,fragment).commit();*/
 
-      }
-  });
+            }
+        });
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,27 +107,26 @@ public class RegistrarUsuario extends AppCompatActivity {
                     if (password.length() >= 6) {
                         registroUser();
                     } else {
-                        Toast.makeText(RegistrarUsuario.this, "El Password debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity().getApplicationContext(), "El Password debe tener al menos 6 caracteres", Toast.LENGTH_SHORT).show();
                     }
 
                 } else {
-                    Toast.makeText(getApplicationContext(), "Campos vacios ", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "Campos vacios ", Toast.LENGTH_LONG).show();
 
                 }
             }
 
         });
 
+        return r;
     }
-
-
     public void GuardarDatos() {
         String nombre2 = nombre.getText().toString();
         String email2 =email.getText().toString();
         String password= pass.getText().toString();
 
 
-        ConexionUsuario conexion = new ConexionUsuario(this, "Usuarios", null, 1);
+        ConexionUsuario conexion = new ConexionUsuario(getActivity().getApplicationContext(), "Usuarios", null, 1);
         SQLiteDatabase db = conexion.getWritableDatabase();
         if (db != null) {
             System.out.println("Entro");
@@ -119,16 +136,14 @@ public class RegistrarUsuario extends AppCompatActivity {
             registroNuevo.put("password", password);
 
             db.insert("usuario", null, registroNuevo);
-            Toast.makeText(this, "Datos Almacenados BD Usuarios", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Datos Almacenados", Toast.LENGTH_SHORT).show();
 
 
-         Intent intent = new Intent(RegistrarUsuario.this, Logeado.class);
+         /*   Intent intent = new Intent(RegistrarUsuario.this, GalleryFragment.class);
             Bundle datos = new Bundle();
-            datos.putString("email1", email.getText().toString());
+            datos.putString("Email", email.getText().toString());
             intent.putExtras(datos);
-            startActivity(intent);
-
-            //startActivity(new Intent(RegistrarUsuario.this, Main2Activity.class));
+            startActivity(intent);*/
 
         }
     }
@@ -151,25 +166,17 @@ public class RegistrarUsuario extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task2) {
                             if (task2.isSuccessful()) {
-                                Toast.makeText(RegistrarUsuario.this, "USUARIO REGISTARDO CORRECTAMENTE ", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(RegistrarUsuario.this, HomeFragment.class));
-                                finish();
+                                Toast.makeText(getActivity().getApplicationContext(), "USUARIO REGISTARDO CORRECTAMENTE ", Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(getActivity().getApplicationContext(), HomeFragment.class));
+                              //  finish();
                             } else
-                                Toast.makeText(RegistrarUsuario.this, "No se puede registrar este usuario", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity().getApplicationContext(), "No se puede registrar este usuario", Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else {
-                    Toast.makeText(RegistrarUsuario.this, "No se pudo registar este usuario", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "No se pudo registar este usuario", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 }
-
-  /*  public void log(View view)
-    {
-        Intent siguiente=new Intent(this, HomeFragment.class);
-        startActivity(siguiente);
-    }
-
-}*/
